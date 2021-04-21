@@ -1,0 +1,18 @@
+grumphp:
+  tasks:
+    composer:
+    jsonlint:
+    phpcs:
+    phplint:
+      exclude: [ 'vendor/' ]
+    phpmd:
+      whitelist_patterns: [ ]
+      exclude: [ 'vendor/', 'tests/wordpress/', 'includes/advanced-custom-fields-pro/' ]
+      report_format: text
+      ruleset: [ 'cleancode', 'codesize', 'naming' ]
+      triggered_by: [ 'php' ]
+    phpmnd:
+      exclude: [ 'vendor/', 'includes/' ]
+    phpunit:
+#    securitychecker_enlightn:
+#      lockfile: ./composer.lock
