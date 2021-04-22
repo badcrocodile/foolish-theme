@@ -2,7 +2,7 @@
 /**
  * Template part for displaying posts
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package Fool
  */
@@ -36,8 +36,8 @@
 		the_content(
 			sprintf(
 				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'fool-theme' ),
+				/* translators: %s: Name of current post. Only visible to screen readers */
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'fool' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -50,7 +50,7 @@
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'fool-theme' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'fool' ),
 				'after'  => '</div>',
 			)
 		);

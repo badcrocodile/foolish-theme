@@ -2,7 +2,7 @@
 /**
  * Template part for displaying a message that posts cannot be found
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package Fool
  */
@@ -20,7 +20,7 @@
 
 			printf(
 				'<p>' . wp_kses(
-					/* translators: 1: link to WP admin new post page. */
+				/* translators: 1: link to WP admin new post page. */
 					__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'fool-theme' ),
 					array(
 						'a' => array(

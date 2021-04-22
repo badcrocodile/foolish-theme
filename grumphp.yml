@@ -1,18 +1,33 @@
+# https://github.com/phpro/grumphp/tree/master/doc/tasks
+parameters:
+  git_dir: .
+  bin_dir: vendor/bin
 grumphp:
   tasks:
     composer:
+    composer_normalize:
+      indent_size:
+      indent_style:
+      no_update_lock: true
+      verbose: false
     jsonlint:
     phpcs:
     phplint:
       exclude: [ 'vendor/' ]
     phpmd:
-      whitelist_patterns: [ ]
-      exclude: [ 'vendor/', 'tests/wordpress/', 'includes/advanced-custom-fields-pro/' ]
-      report_format: text
-      ruleset: [ 'cleancode', 'codesize', 'naming' ]
+      exclude: [ 'vendor/' ]
+      ruleset: [ '.phpmd.xml.dist' ]
       triggered_by: [ 'php' ]
-    phpmnd:
-      exclude: [ 'vendor/', 'includes/' ]
     phpunit:
+      config_file: '.phpunit.xml.dist'
+    phpparser:
+      ignore_patterns: [ '*/vendor/*' ]
+      visitors:
+        forbidden_function_calls:
+          blacklist: [ 'var_dump' ]
 #    securitychecker_enlightn:
 #      lockfile: ./composer.lock
+    shell:
+      scripts:
+        - [ '-c', './vendor/bin/parallel-lint --exclude .git --exclude vendor .' ]
+        - [ '-c', './vendor/bin/phpmd ./ text .phpmd.xml.dist' ]

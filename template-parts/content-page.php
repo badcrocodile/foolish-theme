@@ -2,7 +2,7 @@
 /**
  * Template part for displaying page content in page.php
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package Fool
  */
@@ -35,7 +35,7 @@
 			edit_post_link(
 				sprintf(
 					wp_kses(
-						/* translators: %s: Name of current post. Only visible to screen readers */
+					/* translators: %s: Name of current post. Only visible to screen readers */
 						__( 'Edit <span class="screen-reader-text">%s</span>', 'fool-theme' ),
 						array(
 							'span' => array(

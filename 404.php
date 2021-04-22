@@ -2,9 +2,9 @@
 /**
  * The template for displaying 404 pages (not found)
  *
- * @link https://codex.wordpress.org/Creating_an_Error_404_Page
+ * @link    https://codex.wordpress.org/Creating_an_Error_404_Page
  *
- * @package foolish
+ * @package fool
  */
 
 get_header(); ?>
@@ -14,22 +14,22 @@ get_header(); ?>
 
 			<section class="error-404 not-found">
 				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'foolish' ); ?></h1>
+					<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'fool' ); ?></h1>
 				</header><!-- .page-header -->
 
 				<div class="page-content">
-					<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'foolish' ); ?></p>
+					<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'fool' ); ?></p>
 
 					<?php
-						get_search_form();
+					get_search_form();
 
-						the_widget( 'WP_Widget_Recent_Posts' );
+					the_widget( 'WP_Widget_Recent_Posts' );
 					?>
 
 					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'foolish' ); ?></h2>
+						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'fool' ); ?></h2>
 						<ul>
-						<?php
+							<?php
 							wp_list_categories( array(
 								'orderby'    => 'count',
 								'order'      => 'DESC',
@@ -37,17 +37,17 @@ get_header(); ?>
 								'title_li'   => '',
 								'number'     => 10,
 							) );
-						?>
+							?>
 						</ul>
 					</div><!-- .widget -->
 
 					<?php
 
-						/* translators: %1$s: smiley */
-						$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'foolish' ), convert_smilies( ':)' ) ) . '</p>';
-						the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
+					/* translators: %1$s: smiley */
+					$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'fool' ), convert_smilies( ':)' ) ) . '</p>';
+					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
 
-						the_widget( 'WP_Widget_Tag_Cloud' );
+					the_widget( 'WP_Widget_Tag_Cloud' );
 					?>
 
 				</div><!-- .page-content -->

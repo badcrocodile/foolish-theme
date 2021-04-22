@@ -10,7 +10,7 @@
  *
  * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package foolish
+ * @package fool
  */
 
 get_header();
@@ -20,14 +20,14 @@ fool_debug( basename( __DIR__ ), pathinfo( __FILE__, PATHINFO_FILENAME ) );
 $sidebar = false;
 ?>
 
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main">
-            <div class="container">
-                <div class="row">
-                    <div class="main-content <?= ( isset( $sidebar ) ? "col-sm-9" : "col-sm-12" ) ?>">
-                        <header class="page-header">
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main">
+			<div class="container">
+				<div class="row">
+					<div class="main-content <?= ( isset( $sidebar ) ? "col-sm-9" : "col-sm-12" ) ?>">
+						<header class="page-header">
 							<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
-                        </header><!-- .page-header -->
+						</header><!-- .page-header -->
 
 						<?php
 						if ( have_posts() ) {
@@ -44,17 +44,17 @@ $sidebar = false;
 							get_template_part( 'template-parts/content', 'none' );
 						}
 						?>
-                    </div>
+					</div>
 
 					<?php if ( $sidebar ) : ?>
-                        <div class="col-sm-3">
+						<div class="col-sm-3">
 							<?php get_sidebar(); ?>
-                        </div>
+						</div>
 					<?php endif ?>
-                </div>
-            </div>
-        </main>
-    </div>
+				</div>
+			</div>
+		</main>
+	</div>
 
 <?php
 get_footer();

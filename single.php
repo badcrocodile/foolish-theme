@@ -10,7 +10,7 @@
  *
  * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package foolish
+ * @package fool
  */
 
 get_header();
@@ -20,8 +20,8 @@ fool_debug( basename( __DIR__ ), pathinfo( __FILE__, PATHINFO_FILENAME ) );
 $sidebar = false;
 ?>
 
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main">
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main">
 
 			<?php
 			while ( have_posts() ) : the_post();
@@ -32,8 +32,8 @@ $sidebar = false;
 			endwhile; // End of the loop.
 			?>
 
-        </main><!-- #main -->
-    </div><!-- #primary -->
+		</main><!-- #main -->
+	</div><!-- #primary -->
 
 <?php
 if ( $sidebar ) {
