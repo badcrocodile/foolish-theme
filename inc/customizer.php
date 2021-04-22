@@ -10,7 +10,7 @@
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function fool_theme_customize_register( $wp_customize ) {
+function fool_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
@@ -20,26 +20,26 @@ function fool_theme_customize_register( $wp_customize ) {
 			'blogname',
 			array(
 				'selector'        => '.site-title a',
-				'render_callback' => 'fool_theme_customize_partial_blogname',
+				'render_callback' => 'fool_customize_partial_blogname',
 			)
 		);
 		$wp_customize->selective_refresh->add_partial(
 			'blogdescription',
 			array(
 				'selector'        => '.site-description',
-				'render_callback' => 'fool_theme_customize_partial_blogdescription',
+				'render_callback' => 'fool_customize_partial_blogdescription',
 			)
 		);
 	}
 }
-add_action( 'customize_register', 'fool_theme_customize_register' );
+add_action( 'customize_register', 'fool_customize_register' );
 
 /**
  * Render the site title for the selective refresh partial.
  *
  * @return void
  */
-function fool_theme_customize_partial_blogname() {
+function fool_customize_partial_blogname() {
 	bloginfo( 'name' );
 }
 
@@ -48,14 +48,14 @@ function fool_theme_customize_partial_blogname() {
  *
  * @return void
  */
-function fool_theme_customize_partial_blogdescription() {
+function fool_customize_partial_blogdescription() {
 	bloginfo( 'description' );
 }
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
-function fool_theme_customize_preview_js() {
+function fool_customize_preview_js() {
 	wp_enqueue_script( 'fool-theme-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), _S_VERSION, true );
 }
-add_action( 'customize_preview_init', 'fool_theme_customize_preview_js' );
+add_action( 'customize_preview_init', 'fool_customize_preview_js' );

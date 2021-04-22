@@ -1,51 +1,60 @@
 <?php
 /**
- * The template for displaying archive pages
+ * The router for displaying archive pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * Usage: If you want a different layout for the archive display of Post Type "Books",
+ * add an is_post_type_archive('books) check in the switch below * and point it to your Books template
  *
- * @package Fool
+ * page.php holds routing rules for pages
+ * single.php holds routing rules for single posts and post-types
+ *
+ * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package foolish
  */
 
 get_header();
+
+fool_debug( basename( __DIR__ ), pathinfo( __FILE__, PATHINFO_FILENAME ) );
+
+$sidebar = false;
 ?>
 
-	<main id="primary" class="site-main">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="container">
+                <div class="row">
+                    <div class="main-content <?= ( isset( $sidebar ) ? "col-sm-9" : "col-sm-12" ) ?>">
+                        <header class="page-header">
+							<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
+                        </header><!-- .page-header -->
 
-		<?php if ( have_posts() ) : ?>
+						<?php
+						if ( have_posts() ) {
+							while ( have_posts() ) : the_post();
+								switch ( true ) {
+									default:
+										$sidebar = true;
+										get_template_part( 'archives/archive', 'default' );
+								}
+							endwhile;
 
-			<header class="page-header">
-				<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
+							fool_pagination( $wp_query );
+						} else {
+							get_template_part( 'template-parts/content', 'none' );
+						}
+						?>
+                    </div>
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-	</main><!-- #main -->
+					<?php if ( $sidebar ) : ?>
+                        <div class="col-sm-3">
+							<?php get_sidebar(); ?>
+                        </div>
+					<?php endif ?>
+                </div>
+            </div>
+        </main>
+    </div>
 
 <?php
-get_sidebar();
 get_footer();

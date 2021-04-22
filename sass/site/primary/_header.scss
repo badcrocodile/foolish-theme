@@ -1,0 +1,266 @@
+.hamburger {
+    float: right;
+    position: relative;
+    top: 13px;
+    display: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+//.nav-wrap.navbar {
+//    background: #fff;
+//    top: 30px;
+//    height: 80px;
+//    z-index: 9;
+//}
+
+.navbar {
+	margin-bottom: 0;
+	background: #fff;
+	border: 0;
+	border-top: 10px solid $color__primary;
+	//height: 80px;
+    z-index: 9;
+    border-radius: 0;
+    box-shadow: 2px 2px 7px 0 rgba(0,0,0,.15);
+
+	.nav {
+		float: right;
+	}
+
+    a {
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        //background: $color__primary;
+        border: none;
+        padding: 0;
+
+        li {
+            width: 100%;
+        }
+
+        > .active > a {
+            //background-color: $color__highlight;
+        }
+    }
+
+    .navbar-right .dropdown-menu {
+        left: 0;
+        right: auto;
+    }
+
+	.navbar-brand {
+		height: auto;
+
+		img {
+			height: 70px;
+			position: relative;
+			top: 0px;
+		}
+	}
+
+    li a {
+        color: #444;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        font-size: 16px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: $color__primary;
+            color: #fff;
+        }
+
+        &:active, &:focus {
+            background-color: $color__primary;
+        }
+    }
+
+    .dropdown-menu li a {
+        padding: 15px 30px 15px 15px;
+    }
+
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    //.dropdown-submenu:hover>.dropdown-menu {
+    //    display: block;
+    //}
+    .dropdown-submenu:hover {
+        cursor: pointer;
+    }
+
+    .dropdown-submenu > a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: $color__primary;
+        margin-top: 7px;
+        margin-right: -18px;
+    }
+
+    .dropdown-submenu:hover > a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left > .dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+
+    & > li > a {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        transition: all 0.3s ease;
+        color: $color__link_hover;
+    }
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: $color__primary;
+    color: #fff;
+    border: none;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+// Mobile slide-in nav
+a.mm-btn_next {
+    background-color: $color__primary !important;
+}
+
+@media screen and (max-width: 767px) {
+    .hamburger {
+        display: block;
+    }
+    .navbar {
+        top: 0;
+        height: 80px;
+
+        .navbar-brand img {
+            height: 90px;
+            top: -9px;
+        }
+
+        .nav-toggle {
+            background: $color__primary;
+            margin-top: 6px;
+            padding: 15px;
+
+            .icon-bar {
+                background: $color__background-body;
+            }
+        }
+
+        .navbar-collapse {
+            //background: $color__background_nav_opaque;
+        }
+
+        .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+            background: $color__primary;
+            //color: $color__headline_light;
+        }
+
+        .nav>li>a:focus, .nav>li>a:hover {
+            background: $color__primary;
+            //color: $color__headline_light;
+        }
+
+        .navbar-nav .open .dropdown-menu .dropdown-header, .navbar-nav .open .dropdown-menu>li>a {
+            background: $color__secondary;
+        }
+
+        .navbar-nav>li>a {
+            padding: 15px;
+        }
+    }
+}
+
+.admin-bar .sf-header-search {
+    top: 32px;
+}
+
+// The fade-in search
+.sf-header-search {
+    display: none;
+    background: #fff;
+    //position: absolute;
+    position: fixed;
+    top: 0;
+    height: 80px;
+    width: 100%;
+    z-index: 2010;
+
+    form {
+        float: left;
+        height: 80px;
+        width: 100%;
+    }
+
+    input[type="text"] {
+        height: 100%;
+        width: 100%;
+        border: none;
+        padding: 0;
+        margin: 0;
+        font-size: 32px;
+        outline: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .header-search-close {
+        position: absolute;
+        right: 26px;
+        top: 18px;
+        font-size: 30px;
+        color: #ccc;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.search-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 100;
+    overflow: hidden;
+    display: none;
+}

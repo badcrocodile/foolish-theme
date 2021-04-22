@@ -1,0 +1,31 @@
+.widget {
+}
+
+.widget {
+	padding: 15px 30px;
+	border-radius: 4px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.05),0 0 0 1px rgba(0,0,0,.06);
+	background: #f7f7f7;
+	margin: 0 0 0 0;
+
+	/* Make sure select elements fit in widgets. */
+	select {
+		max-width: 100%;
+	}
+
+	.widget-title {
+		margin-top: 10px;
+		font-size: 1.2em;
+	}
+
+	ul {
+		margin: 0;
+		padding-left: 0;
+		list-style-type: none;
+
+		li {
+			padding: 15px 0;
+			border-bottom: 1px solid #e3e3e3;
+		}
+	}
+}

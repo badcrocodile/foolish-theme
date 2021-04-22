@@ -22,14 +22,14 @@
 			?>
 			<div class="entry-meta">
 				<?php
-				fool_theme_posted_on();
-				fool_theme_posted_by();
+				fool_posted_on();
+				fool_posted_by();
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php fool_theme_post_thumbnail(); ?>
+	<?php fool_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -58,6 +58,6 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php fool_theme_entry_footer(); ?>
+		<?php fool_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
