@@ -5,47 +5,18 @@ The Motley Fool Code Challenge
 Included please find 3 primary components:
 - **Foolish Stock Advisor:** An Underscores based theme for displaying content, as described in the requirements.
 - **Foolish Company Data:** A plugin to handle API integration with the Financial Modeling Prep API, as described in the requirements.
-- **Foolish Shortcodes:** A plugin to execute shortcodes that expand tickers into the commonly used format. Not in the requirements but looking at the content samples it could prove to be useful for content creators. And it was fun.
 
-## Local Installation:
-This is the easiest way to get going. Following these steps will install an Ubuntu 18.04 box and handle all the dependencies, including the installation of WordPress and populating the database with seed data, including the example content provided in the Code Challenge.
-
-**Requirements:**
-- [Git](https://git-scm.com/)
-- [Vagrant](https://www.vagrantup.com/)
-- [Vagrant hostsupdater](https://github.com/agiledivider/vagrant-hostsupdater)
-- [VirtualBox](https://www.virtualbox.org/) 
-- [Ansible](https://www.ansible.com/)
+## Installation:
+**Optional Requirements:**
+You'll need [Composer](https://getcomposer.org/) if you want to run the unit tests, code sniffers, mess detectors, etc.
 
 **Installation:**
-1. [Download or clone the repository](https://github.com/badcrocodile/foolish-project): `git clone git@github.com:badcrocodile/foolish-project.git`
-1. Fire up your terminal and cd into the newly created directory: `cd /path/to/project/`
-1. Set up your server with Vagrant by running vagrant up: `vagrant up`
-1. Grab some coffee (and a snack) while the server provisions. It will take about 10 minutes.
-    1. The vagrant script will provision a new Ubuntu 18.04 LAMP server, wire it up and configure all dependencies.
-    1. It will then install WordPress and import the database from `/sql/vagrant.sql`.
-1. Once the script is done you can visit your site by visiting [http://foolish-project.vagrant](http://foolish-project.vagrant)
-1. The default username and password is thefool / fool123
-
-## Installation from Scratch
-Please consider using the Vagrant installation instructions above, but if you'd rather install the files into an existing bare WP installation here's what you need to do. 
-
-1. [Download the repository](https://github.com/badcrocodile/foolish-project).
-1. Locate the _Foolish Stock Advisor_ theme directory at `/public/wp-content/themes/thefool/` and move it into your installation.
-1. Locate the _Foolish Company Data_ plugin directory at `/public/wp-content/plugins/fool-company-data/` and move it to your installation.
-1. Locate the _Foolish Shortcodes_ plugin directory at `/public/wp-content/plugins/fool-shortcodes` and move it to your installation.
-1. Locate the `composer.json`, located at `/composer.json` and move it to your installation. 
-    1. Verify that the path in `composer.json` matches your directory structure.
-    1. Install dependencies with `composer install`
-    1. Update the autoloader with `composer dumpautoload -o`
-1. **OPTIONAL:** Locate the DB dump at `/sql/vagrant.sql` and import that into your DB. It will really speed up your requirement validation times. Note that you'll have to update `WP_HOME` and `WP_SITEURL` after this operation.
-1. Locate and activate the Advanced Custom Fields plugin to support the site functionality.
-     1. This theme is using ACF Local JSON for syncing of fields. Once activated, navigate to `WP Admin -> Custom Fields` and run the updater to get your fields setup. 
-1. After importing the ACF fields, navigate to **WP Admin -> Theme Settings** and enter your API key.
-1. Activate the _Foolish Company Data_ and _Foolish Shortcodes_ plugins.
-1. Activate the _Foolish Stock Advisor_ theme.
-1. Add the "Categories" widget to your primary sidebar
-
+1. Download or clone the theme from the [GitHub Repo](https://github.com/badcrocodile/foolish-theme)
+1. Download or clone the plugin from the [GitHub Repo](https://github.com/badcrocodile/foolish-plugin)
+1. Extract the plugin into `/wp-content/plugins/` and activate
+1. Enter your API key in the plugin options page at `Admin -> Settings -> Foolish Plugin Settings`
+1. Extract the theme into `/wp-content/themes/` and activate
+1. Add the "Categories" widget to your primary sidebar `Admin -> Appearance -> Widgets`
 
 ## Now the fun starts! Let's walk through those requirements:
 
@@ -53,39 +24,34 @@ Please consider using the Vagrant installation instructions above, but if you'd 
 
 > > ### Story 1: Create a News article
 > A News article has the following requirements:
-> 
+>
 > - The author needs to be able to write and edit the article.
 > - The author needs to be able to associate the article with the ticker symbol for the stock being discussed, if any, e.g. NASDAQ:SBUX.
-> - Once published, the article needs to display the following: 
->   - The author’s name 
->   - The date that the article was published 
+> - Once published, the article needs to display the following:
+>   - The author’s name
+>   - The date that the article was published
 >   - The article itself
 
 **Steps to validate:**
-- The easy way: 
-  - Navigate to [_Starbucks Reports Record Quarter, but Challenges Remain_](http://foolish-project.vagrant/2018/07/starbucks-reports-record-quarter-but-challenges-remain/)
-  - Notice that authors name, publish date, and article content are all displayed.
-  - Click the "Edit Post" link in the WP Admin bar to validate the requirement of writing and editing the article.
-- Alternatively:
-  - Log in to the admin and create your own post.
-  - To associate the article with a ticker symbol:
-    - Make sure that "Post" is the active selection for the sidebar. 
+- Log in to the admin and create a post.
+- To associate the article with a ticker symbol:
+    - Make sure that "Post" is the active selection for the sidebar.
     - Locate the "Associated Company" metabox in the sidebar.
     - Select a company ticker from the list. If your desired company isn't listed, click the blue "+" (plus) sign to add a new ticker.
-  - Optionally assign a category
-  - Publish your content
-    
+- Optionally assign a category
+- Publish your content
+
 ---
 
 > > ### Story 2: Create a Stock Recommendation article
 > The Stock Recommendation article has the following requirements:
 >
-> - The author needs to be able to write and edit the article. 
+> - The author needs to be able to write and edit the article.
 > - The author needs to be able to associate the article with the ticker symbol for the stock being recommended, e.g. NASDAQ:SBUX.
 > - Once published, the article needs to display the following:
 >   - The author’s name
 >   - The date that the recommendation was published
->   - The article itself 
+>   - The article itself
 > - In a sidebar or callout box, it should display the following pieces of company profile information, which will come from an API call (see note below):
 >   - Company Logo
 >   - Company Name
@@ -96,21 +62,15 @@ Please consider using the Vagrant installation instructions above, but if you'd 
 >   - CEO Website URL
 
 **Steps to Validate:**
-- The easy way:
-    - Navigate to [_Buy Starbucks (SBUX)_](http://foolish-project.vagrant/2021/04/buy-starbucks/)
-    - Notice that authors name, publish date, and article content are all displayed.
-    - Click the "Edit Post" link in the WP Admin bar to validate the requirement of writing and editing the article.
-    - Scroll to the bottom of the post and notice that there is a callout box containing all required information, delivered via the Financial Modeling Prep API.
-- Alternatively:
-    - Log in to the admin and create your own post.
-    - To associate the article with a ticker symbol:
-        - Make sure that "Post" is the active selection for the sidebar.
-        - Locate the "Companies" taxonomy metabox in the sidebar.
-        - Typing a few characters of your desired Company will trigger an auto-population dropdown. Select your company ticker from the list of available matches. 
-          If your desired company isn't listed that's okay, just finish typing the company name. Your company will be automatically created and available via auto-population the
-          next time you need it. The expectation for this field is company ticker.
-    - Assign the post to category "Stock Recommendation".
-    - Publish your content.
+- Log in to the admin and create your own post.
+- To associate the article with a ticker symbol:
+    - Make sure that "Post" is the active selection for the sidebar.
+    - Locate the "Companies" taxonomy metabox in the sidebar.
+    - Typing a few characters of your desired Company will trigger an auto-population dropdown. Select your company ticker from the list of available matches.
+      If your desired company isn't listed that's okay, just finish typing the company name. Your company will be automatically created and available via auto-population the
+      next time you need it. The expectation for this field is company ticker.
+- Assign the post to category "Stock Recommendation".
+- Publish your content.
 
 ---
 
@@ -122,7 +82,7 @@ Please consider using the Vagrant installation instructions above, but if you'd 
 
 **Steps to Validate:**
 - Navigate to the [Stock Recommendation archive page](http://foolish-project.vagrant/category/stock-recommendation/)
-- Notice that both requirements for this page have been met.      
+- Notice that both requirements for this page have been met.
 
 ---
 
@@ -145,16 +105,51 @@ Please consider using the Vagrant installation instructions above, but if you'd 
 > - Any News articles should be listed under the header “Other Coverage” in reverse chronological order (newest first). If there are more than 10 articles, the user should be able to page through them. Subsequent pages should contain everything except the list of Recommendation articles.
 
 **Steps to Validate:**
-- The easy way:
-    - Navigate to the [Starbucks Company Page](http://foolish-project.vagrant/company/sbux/)
+Company Pages are created dynamically when new Company taxonomy terms are added to the database. To test a company:
+1. Go to the list of available companies at `Admin -> Posts -> Companies`
+1. Select a company from the list and click the 'View' action that is available on hover.
     - Notice that the description of the company exists as the main content, with the company logo placed to the right.
     - Notice that company Financial Data is displayed in a table below the description.
     - Notice that Previous Recommendations exist in a callout box below the financial information.
     - Notice that below the previous recommendations, Other Coverage is displayed in a callout box.
-      - Notice that users can paginate through the list of articles using the pagination links.
-      - Notice that this list excludes articles posted in Previous Recommendations
-    
+        - Notice that users can paginate through the list of articles using the pagination links.
+        - Notice that this list excludes articles posted in Previous Recommendations
+
 ---
+
+## Tests and Code Quality
+Unit tests and code quality tools have been made available for both the plugin and the theme. These tools use [Grumphp](https://github.com/phpro/grumphp)
+to automate the execution of tasks such as PHP Unit, PHPMD, PHPCS, PHP Lint, etc. They run on a pre-commit hook.
+You can see the full list by viewing `/plugins/foolish-company-data/grumphp.yml` for the plugin and `/themes/fool-theme/grumphp.yml` for the theme.
+
+### Testing Setup
+The theme and plugin use the [wp scaffold](https://developer.wordpress.org/cli/commands/scaffold/) wp-cli commands to bootstrap the testing suite.
+Basically there's some setup that we need to do if you want to test locally. Instructions are below, but full documentation is available via the [Codex](https://make.wordpress.org/cli/handbook/misc/plugin-unit-tests/#running-tests-locally).
+
+**To initialize the testing environment:**
+1. SSH into your local WordPress environment.
+1. Run the installation script found at `/plugins/foolish-company-data/bin/install-wp-tests.sh`.
+   ```bash
+   ./bin/install-wp-tests.sh wordpress_test root '' localhost latest
+   ```
+   The installation script first installs a copy of WordPress in the `/tmp` directory (by default) as well as the WordPress unit testing tools.
+   Then it creates a database to be used while running tests. The parameters that are passed to `install-wp-tests.sh` setup the test database.
+    - `wordpress_test` is the name of the test database (all data will be deleted!)
+    - `root` is the MySQL user name
+    - `''` is the MySQL user password
+    - `localhost` is the MySQL server host
+    - `latest` is the WordPress version; could also be `3.7`, `3.6.2` etc.
+
+### Running the tests
+You can manually fire Grumphp and execute all tests by running `./vendor/bin/grumphp run` from the desired directory root (theme or plugin).
+
+To execute code quality tests individually you can use the available Composer tasks outlined in `composer.json`:
+- `composer lint`
+- `composer wpcs`
+- `composer phpmd`
+
+To manually run the unit tests:
+- `./vendor/bin/phpunit --configuration=.phpunit.xml.dist --testdox`
 
 ## Callouts
 
@@ -169,18 +164,17 @@ Please consider using the Vagrant installation instructions above, but if you'd 
 
 ## Wrapping Up
 
-Thank you for this opportunity, it was a fun challenge! It was a great mix of all the things that go into modern WordPress development. 
+Thank you for this opportunity, it was a fun challenge! It was a great mix of all the things that go into modern WordPress development.
 
 I hope the installation goes well. After writing this documentation there were a few things that jumped out at me that I could have done differently to make the process easier...creating a plugin settings dashboard to hold the API key instead of using ACF for example... but I was already pushing time and wanted to respect the requirements.
 
-There are also hard dependencies between the theme and the Foolish Company Data plugin. I'd have liked to have decoupled those more gracefully. 
-Actually there are about a million things I'd liked to have put more time into, but I think that's always the case about the things we create. But at some point we just have to let it go... so here it is, in all of its imperfect glory :) 
+There are also hard dependencies between the theme and the Foolish Company Data plugin. I'd have liked to have decoupled those more gracefully.
+Actually there are about a million things I'd liked to have put more time into, but I think that's always the case about the things we create. But at some point we just have to let it go... so here it is, in all of its imperfect glory :)
 
 Please feel free to hit me up anytime 24/7 with questions or if you run into issues, and best of luck on your search.
 
 Peace,
 
-Jason  
-jason@coolguy.org  
+Jason
+jason@coolguy.org
 574-903-3563
-
