@@ -180,26 +180,26 @@ add_filter( 'login_headerurl', 'fool_login_logo_url' );
 add_filter( 'login_headertitle', 'fool_login_logo_url_title' );
 function fool_login_logo_one() {
 	?>
-    <style type="text/css">
-        body.login {
-            background: #fff !important;
-        }
+	<style type="text/css">
+		body.login {
+			background: #fff !important;
+		}
 
-        body.login div#login h1 a {
-            background-image: url(<?php bloginfo('template_url'); ?>/images/logo.png);
-            background-size: 310px;
-            width: 100%;
-        }
+		body.login div#login h1 a {
+			background-image: url(<?php bloginfo('template_url'); ?>/images/logo.png);
+			background-size: 310px;
+			width: 100%;
+		}
 
-        body.login form {
-            padding: 30px 20px;
-            box-shadow: 0px 4px 7px 1px rgba(0, 0, 0, .13);
-        }
+		body.login form {
+			padding: 30px 20px;
+			box-shadow: 0px 4px 7px 1px rgba(0, 0, 0, .13);
+		}
 
-        body.login #backtoblog {
-            display: none;
-        }
-    </style>
+		body.login #backtoblog {
+			display: none;
+		}
+	</style>
 	<?php
 }
 
@@ -244,9 +244,9 @@ function fool_go_mime_types( $mimes ) {
  */
 function fool_debug( $filepath, $filename ) {
 	if ( get_field( 'theme_debug', 'option' ) ) : ?>
-        <script type="text/javascript">
+		<script type="text/javascript">
 			console.log("<?= $filepath ?>/<?= $filename ?>");
-        </script><?php
+		</script><?php
 	endif;
 }
 
@@ -443,12 +443,18 @@ function fool_paginate_custom_query() {
 	// Using page 3 and posts_per_page of 5 for example: (3 - 1) x 5 = 10. Ten should be our offset.
 	$offset = ( $page - 1 ) * 5;
 
+	// Skip posts in this category
+	$cat_not_in = '';
+	if ( get_category_by_slug( 'stock-recommendation' ) ) {
+		$cat_not_in = get_category_by_slug( 'stock-recommendation' )->term_id;
+	}
+
 	$company_ticker = $_POST['company_ticker'];
 
 	$args = [
 		'post_type'        => 'post',
 		'post_status'      => 'publish',
-		'category__not_in' => [ get_category_by_slug( 'stock-recommendation' )->term_id ],
+		'category__not_in' => [ $cat_not_in ],
 		'posts_per_page'   => 5,
 		'offset'           => $offset,
 		'tax_query'        => [
@@ -484,7 +490,7 @@ function fool_paginate_custom_query() {
 
 	echo $return_string;
 
-	die();
+	wp_die();
 }
 
 // add_action( 'init', 'cptui_register_my_taxes_company' );

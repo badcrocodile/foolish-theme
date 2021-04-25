@@ -1,10 +1,11 @@
 <?php
 
-use Fool\Connection;
+
+use Fool\FoolishPlugin\Api\Connection;
 
 $ticker = strtoupper( get_the_terms( $id, 'company' )[0]->name );
 
-$profile = ( new Connection( $ticker, 'profile' ) )->getResponse();
+$profile = ( new Connection( $ticker, 'profile' ) )->get_response();
 ?>
 
 <?php if ( is_string( $profile ) ) : ?>
